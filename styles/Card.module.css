@@ -1,0 +1,46 @@
+.card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto 1fr 1fr 0.25fr;
+    grid-template-areas:
+        "image image"
+        "title title"
+        "price buy"
+        ". .";
+    align-items: center;
+  
+    max-width: 80vw;
+    background: var(--cards-color);
+  
+    border-radius: 8px;
+    overflow: hidden;
+}
+  
+  .card .productImage {
+    grid-area: image;
+    min-width: 100%;
+  }
+  
+  .card .productName {
+    padding-left: 20px;
+    grid-area: title;
+
+    font-weight: 200;
+  }
+  
+  .card .price {
+    padding-left: 20px;
+    grid-area: price;
+
+    font-weight: 400;
+  }
+  
+  .card .buy {
+    padding: 6px;
+    grid-area: buy;
+    justify-self: center;
+  
+    border-radius: 2px;
+    background-color: var(--button-color);
+    box-shadow: 1px 1px 4px var(--shadow-color);
+  }
