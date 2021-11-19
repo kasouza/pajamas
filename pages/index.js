@@ -9,7 +9,7 @@ import { getAllProductsData } from '../lib/products'
 
 import Head from 'next/head'
 
-export default function Home() {
+export default function Home({ productsData }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -31,9 +31,10 @@ export default function Home() {
 
       <main>
         <section className={styles.products}>
-          <Card title="Saske Nartuo Mt Pica Mesmo" price={420.69} image="/images/cat.jpg" />
-          <Card title="Saske Nartuo das Galaxia" price={420.69} image="/images/cat.jpg" />
-          <Card title="Saske Nartuo O Brabo" price={420.69} image="/images/cat.jpg" />
+          {/* Create a card for each product that was read from disk */}
+          {productsData.map(product => (
+            <Card key={product.id} id={product.id} title={product.title} price={product.price} image={product.image} />
+          ))}
         </section>
       </main>
 
@@ -44,11 +45,11 @@ export default function Home() {
 }
 
 export function getStaticProps() {
-  console.log(getAllProductsData())
+  const productsData = getAllProductsData();
 
   return {
     props: {
-
+      productsData
     }
   }
 }

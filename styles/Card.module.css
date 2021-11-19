@@ -9,7 +9,7 @@
         ". .";
     align-items: center;
   
-    max-width: 80vw;
+    max-width: 95vw;
     background: var(--cards-color);
   
     border-radius: 8px;
@@ -19,6 +19,7 @@
   .card .productImage {
     grid-area: image;
     min-width: 100%;
+    max-width: 100%;
   }
   
   .card .productName {
