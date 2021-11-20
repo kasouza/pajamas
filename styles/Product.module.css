@@ -1,0 +1,55 @@
+/* main */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    padding: 10px;
+    width: 98vw;
+
+    background-color: var(--dark-color);
+}
+
+/* Heading */
+.heading {
+    margin-bottom: 40px;
+}
+
+.title {
+    margin: 5px 0;
+    font-weight: 200;
+    font-size: 2.2rem;
+}
+
+.price {
+    font-weight: 400;
+}
+
+/* Options */
+.size {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* Addtitional Info */
+.info {
+    font-weight: 200;
+}
+
+/* Buttno */
+.addToCart {
+    padding: 5px;
+    display: block;
+    border-radius: 5px;
+    margin: 10px auto;
+    width: 80vw;
+
+    font-size: 1.2rem;
+
+    color: var(--font-color);
+    background-color: var(--button-color);
+}

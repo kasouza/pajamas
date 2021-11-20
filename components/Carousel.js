@@ -11,33 +11,34 @@ const images = [
 export default function Carousel({ width, height }) {
     const [imageId, setImageId] = useState(0)
     const [transitionImg, setTransitionImage] = useState(-1)
+    const [transitionDir, setTransitionDir] = useState(styles.translr)
 
     function transition(image) {
         setTransitionImage(image)
 
         setTimeout(() => {
             setTransitionImage(-1)
+            setImageId(image)
+
         }, 1000)
     }
 
     function setImage(count) {
         // Wrap around (i.e. (0 - 1) == (images.length - 1))
         const nextImageId = Math.abs(imageId - count) % images.length
-        console.log(imageId)
-        console.log(nextImageId)
-        transition(imageId)
-        setImageId(nextImageId)
+        setTransitionDir(count > 0 ? styles.transrl : styles.translr)
+        transition(nextImageId)
     }
 
     return (
         <div className={styles.carousel}>
-            <Image width={width} height={height} src={images[imageId]} />
+            <img className={styles.image} src={images[imageId]} />
             {transitionImg != -1
-                ? <img className={styles.transition} width={width} height={height} src={images[transitionImg]} />
+                ? <img className={`${styles.transition} ${transitionDir}`} src={images[transitionImg]} />
                 : <></>
             }
-            <button onClick={() => setImage(-1)}>&lt;</button>
-            <button onClick={() => setImage(1)}>&gt;</button>
+            <button className={styles.left} onClick={() => setImage(-1)}>&lt;</button>
+            <button className={styles.right} onClick={() => setImage(1)}>&gt;</button>
         </div>
     )
 }

@@ -25,8 +25,6 @@
   .card .productName {
     padding-left: 20px;
     grid-area: title;
-
-    font-weight: 200;
   }
   
   .card .price {
@@ -44,4 +42,6 @@
     border-radius: 2px;
     background-color: var(--button-color);
     box-shadow: 1px 1px 4px var(--shadow-color);
+
+    font-weight: 300;
   }

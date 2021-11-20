@@ -1,12 +1,60 @@
-import Carousel from "../../components/Carousel";
-import { getAllProductsIds, getProductData } from "../../lib/products";
+import styles from "../../styles/Product.module.css"
+
+import Carousel from "../../components/Carousel"
+import Footer from "../../components/Footer"
+import Nav from "../../components/Nav"
+import Radio from "../../components/Radio"
+
+import { getAllProductsIds, getProductData } from "../../lib/products"
 
 export default function Product({ productData }) {
     return (
-        <>
-            <h1>{productData.title}</h1>
-            <Carousel width={300} height={200}/>
-        </>
+        <div className={styles.container}>
+            <header>
+                <Nav />
+            </header>
+
+            <main className={styles.main}>
+                <Carousel className={styles.carousel} />
+
+                <div className={styles.content}>
+                    <section className={styles.heading}>
+                        <h1 className={styles.title}>{productData.title}</h1>
+                        <span className={styles.price}>{`R$${productData.price.toFixed(2)}`}</span>
+                    </section>
+
+                    <section className={styles.options}>
+                        <h2>Tamanho: </h2>
+                        <ul className={styles.size}>
+                            <li>
+                                <Radio name="size" value="P" />
+                            </li>
+
+                            <li>
+                                <Radio name="size" value="M" />
+                            </li>
+
+                            <li>
+                                <Radio name="size" value="G" />
+                            </li>
+
+                            <li>
+                                <Radio name="size" value="GG" />
+                            </li>
+                        </ul>
+                    </section>
+
+                    <button className={styles.addToCart}>Add To Cart</button>
+
+                    <section  className={styles.info}>
+                        <h2>Mais Detalhes</h2>
+                        <div dangerouslySetInnerHTML={{ __html: productData.htmlContent }} />
+                    </section>
+                </div>
+            </main>
+
+            <Footer />
+        </div>
     )
 }
 
