@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background: #101010;
+  background: var(--bg-color);
   color: var(--font-color);
   font-family: 'Poppins', sans-serif;
   font-weight: 200;
@@ -43,6 +43,7 @@ li {
   --space-cadet: #141852;
   --cetacean-blue: #070b34;
 
+  --bg-color: #101010;
   --dark-color: #202020;
 
   --primary-color: var(--dark-lavender);
@@ -50,4 +51,9 @@ li {
   --button-color: var(--regalia);
   --shadow-color: rgba(43, 47, 119, .5);
   --font-color: #f2f2f2;
+}
+
+.noScroll {
+  position: fixed;
+  overflow-y: hidden;
 }

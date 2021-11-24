@@ -1,0 +1,17 @@
+.cartItem {
+    display: grid;
+    grid-template-columns: auto 2fr 0.5fr;
+    column-gap: 10px;
+
+    margin: 5px;
+    width: 100%;
+
+    background-color: var(--dark-color);
+
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.title {
+    margin: 0;
+}
