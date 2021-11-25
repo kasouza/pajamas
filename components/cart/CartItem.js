@@ -15,7 +15,7 @@ export default function CartItem({ id, title, price, size, quantity }) {
             </div>
 
             <button>
-                X
+                <img className={styles.trash} src="/images/trash.png" />
             </button>
         </li>
     )

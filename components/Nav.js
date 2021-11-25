@@ -1,8 +1,7 @@
-import Cart from './cart/Cart'
-
 import styles from '../styles/Nav.module.css'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Nav() {
   return (
@@ -13,7 +12,17 @@ export default function Nav() {
         </a>
       </Link>
 
-      <Cart />
+      <Link href="/cart">
+        <a>
+          <Image
+            className={styles.cartIcon}
+            width={32}
+            height={32}
+            src="/images/shopping-cart.svg"
+            alt="Carrinho de Compras"
+          />
+        </a>
+      </Link>
     </nav>
   )
 }

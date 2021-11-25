@@ -12,6 +12,16 @@
     overflow: hidden;
 }
 
+.cartItem button {
+    background: rgb(228, 14, 14);
+}
+
+.trash {
+    width: 32px;
+    height: 32px;
+    filter: invert(100%);
+}
+
 .title {
     margin: 0;
 }
