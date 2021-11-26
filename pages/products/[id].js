@@ -7,7 +7,7 @@ import Radio from "../../components/Radio"
 
 import { getAllProductsIds, getProductData } from "../../lib/products"
 
-export default function Product({ productData }) {
+export default function Product({ productData, onAddToCart }) {
     return (
         <div className={styles.container}>
             <header>
@@ -44,9 +44,13 @@ export default function Product({ productData }) {
                         </ul>
                     </section>
 
-                    <button className={styles.addToCart}>Add To Cart</button>
+                    <button
+                        onClick={() => onAddToCart(productData.id)}
+                        className={styles.addToCart}>
+                        Add To cart
+                    </button>
 
-                    <section  className={styles.info}>
+                    <section className={styles.info}>
                         <h2>Mais Detalhes</h2>
                         <div dangerouslySetInnerHTML={{ __html: productData.htmlContent }} />
                     </section>

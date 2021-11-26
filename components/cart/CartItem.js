@@ -2,9 +2,9 @@ import styles from "../../styles/CartItem.module.css"
 
 import Image from "next/image"
 
-export default function CartItem({ id, title, price, size, quantity }) {
+export default function CartItem({ id, title, price, size, onRemoveFromCart }) {
     return (
-        <li className={styles.cartItem} key={id}>
+        <li className={styles.cartItem}>
             <Image src="/images/cat.jpg" width={128} height={80} />
 
             <div>
@@ -14,7 +14,7 @@ export default function CartItem({ id, title, price, size, quantity }) {
                 <span>Tamanho: {size}</span>
             </div>
 
-            <button>
+            <button onClick={() => onRemoveFromCart(id)}>
                 <img className={styles.trash} src="/images/trash.png" />
             </button>
         </li>
