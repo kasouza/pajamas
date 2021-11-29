@@ -8,8 +8,9 @@ import Waves from '../components/Waves'
 import { getAllProductsData } from '../lib/products'
 
 import Head from 'next/head'
+import Cart from './cart'
 
-export default function Home({ productsData }) {
+export default function Home({ cart, productsData }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -19,7 +20,7 @@ export default function Home({ productsData }) {
 
 
       <header className={styles.header}>
-        <Nav />
+        <Nav productsInCart={cart.length} />
         <h1>PAJAMAS</h1>
 
         <Waves type={0} />

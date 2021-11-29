@@ -1,47 +1,55 @@
 .card {
+  padding: 3px;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: auto 1fr 1fr 0.25fr;
+    grid-template-rows: auto auto auto;
     grid-template-areas:
         "image image"
         "title title"
         "price buy"
         ". .";
     align-items: center;
+    row-gap: 10px;
   
     max-width: 95vw;
     background: var(--cards-color);
   
-    border-radius: 8px;
     overflow: hidden;
+
+    border-radius: 5px;
+    opacity: .9;
+}
+
+.card:hover {
+  opacity: 1;
 }
   
-  .card .productImage {
-    grid-area: image;
-    min-width: 100%;
-    max-width: 100%;
-  }
-  
-  .card .productName {
-    padding-left: 20px;
-    grid-area: title;
-  }
-  
-  .card .price {
-    padding-left: 20px;
-    grid-area: price;
+.card .productImage {
+  grid-area: image;
+  min-width: 100%;
+  max-width: 100%;
+}
 
-    font-weight: 400;
-  }
-  
-  .card .buy {
-    padding: 6px;
-    grid-area: buy;
-    justify-self: center;
-  
-    border-radius: 2px;
-    background-color: var(--button-color);
-    box-shadow: 1px 1px 4px var(--shadow-color);
+.card .productName {
+  margin:  0;
+  padding-left: 20px;
+  grid-area: title;
+}
 
-    font-weight: 300;
-  }
+.card .price {
+  margin: 0;
+  padding-left: 20px;
+  grid-area: price;
+  font-weight: 400;
+}
+
+.card .buy {
+  padding: 6px;
+  grid-area: buy;
+  justify-self: center;
+
+  border-radius: 2px;
+  background-color: var(--button-color);
+  box-shadow: 1px 1px 4px var(--shadow-color);
+  font-weight: 300;
+}

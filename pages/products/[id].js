@@ -7,15 +7,24 @@ import Radio from "../../components/Radio"
 
 import { getAllProductsIds, getProductData } from "../../lib/products"
 
-export default function Product({ productData, onAddToCart }) {
+import { useState } from "react"
+
+const images = [
+    '/images/cat.jpg',
+]
+
+
+export default function Product({ cart, productData, onAddToCart }) {
+    const [size, setSize] = useState('M')
+
     return (
         <div className={styles.container}>
             <header>
-                <Nav />
+                <Nav productsInCart={cart.length} />
             </header>
 
             <main className={styles.main}>
-                <Carousel className={styles.carousel} />
+                <Carousel className={styles.carousel} images={images} />
 
                 <div className={styles.content}>
                     <section className={styles.heading}>
@@ -27,27 +36,27 @@ export default function Product({ productData, onAddToCart }) {
                         <h2>Tamanho: </h2>
                         <ul className={styles.size}>
                             <li>
-                                <Radio name="size" value="P" />
+                                <Radio name="size" value="P" onClick={setSize} checked={size == "P"} />
                             </li>
 
                             <li>
-                                <Radio name="size" value="M" />
+                                <Radio name="size" value="M" onClick={setSize} checked={size == "M"} />
                             </li>
 
                             <li>
-                                <Radio name="size" value="G" />
+                                <Radio name="size" value="G" onClick={setSize} checked={size == "G"} />
                             </li>
 
                             <li>
-                                <Radio name="size" value="GG" />
+                                <Radio name="size" value="GG" onClick={setSize} checked={size == "GG"} />
                             </li>
                         </ul>
                     </section>
 
                     <button
-                        onClick={() => onAddToCart(productData.id)}
+                        onClick={() => onAddToCart(productData.id, size)}
                         className={styles.addToCart}>
-                        Add To cart
+                        Adicionar ao Carrinho
                     </button>
 
                     <section className={styles.info}>

@@ -40,16 +40,19 @@
     font-weight: 200;
 }
 
-/* Buttno */
+/* Button */
 .addToCart {
-    padding: 5px;
+    padding: 10px 20px;
     display: block;
-    border-radius: 5px;
-    margin: 10px auto;
-    width: 80vw;
+    border-radius: 20px;
+    margin: 30px auto 40px;
 
     font-size: 1.2rem;
 
     color: var(--font-color);
     background-color: var(--button-color);
+}
+
+.addToCart:hover {
+    background-color: var(--button-hover-color);
 }
