@@ -10,16 +10,23 @@ export default function Cart({ cart, onRemoveFromCart }) {
 
     useEffect(async () => {
         const baseUrl = `/api/products`
-        const params = `${cart.map(id => `ids=${id}`).join('&')}`
+        const params = `${cart.map(product => `ids=${product.id}`).join('&')}`
 
         const url = params ? `${baseUrl}?${params}` : ''
 
         if (url) {
-            await fetch(url).then((ok, err) => {
+            await fetch(url).then((res, err) => {
                 if (!err) {
-                    ok.json().then((ok, err) => {
+                    res.json().then((products, err) => {
                         if (!err) {
-                            setCartData(ok)
+                            products.forEach(item => {
+                                const product = cart.find(product => product.id == item.id)
+                                const size = product != undefined ? product.size : ''
+
+                                item.size = size
+                            })
+
+                            setCartData(products    )
                         } else {
                             console.err(err)
                         }
@@ -32,14 +39,14 @@ export default function Cart({ cart, onRemoveFromCart }) {
     }, [])
 
     useEffect(() => {
-        setCartData(cartData.filter(cartItem => cart.includes(cartItem.id)))
+        setCartData(cartData.filter(cartItem => cart.find(product => product == cartItem.id) != undefined))
     }, [cart])
 
 
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <Nav />
+                <Nav productsInCart={cart.length} />
             </header>
 
             <main>
@@ -61,6 +68,7 @@ export default function Cart({ cart, onRemoveFromCart }) {
                                     id={item.id}
                                     title={item.title}
                                     price={item.price}
+                                    size={item.size}
                                     onRemoveFromCart={onRemoveFromCart}
                                 />
 
