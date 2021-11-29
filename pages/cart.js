@@ -42,33 +42,35 @@ export default function Cart({ cart, onRemoveFromCart }) {
                 <Nav />
             </header>
 
-            <section className={styles.checkoutContainer}>
-                <p className={styles.subtotal}>Subtotal: <span>R$3232123.00</span></p>
+            <main>
+                <section className={styles.checkoutContainer}>
+                    <p className={styles.subtotal}>Subtotal: <span>R$3232123.00</span></p>
 
-                <button className={styles.checkout}>
-                    Finalizar Compra
-                </button>
-            </section>
+                    <button className={styles.checkout}>
+                        Finalizar Compra
+                    </button>
+                </section>
 
-            <section>
-                <ul className={styles.cart}>
-                    <div className={styles.divider} />
+                <section>
+                    <ul className={styles.cart}>
+                        <div className={styles.divider} />
 
-                    {cartData.map(item => (
-                        <div key={item.id}>
-                            <CartItem
-                                id={item.id}
-                                title={item.title}
-                                price={item.price}
-                                onRemoveFromCart={onRemoveFromCart}
-                            />
+                        {cartData.map(item => (
+                            <div key={item.id} className={styles.cartItemContainer}>
+                                <CartItem
+                                    id={item.id}
+                                    title={item.title}
+                                    price={item.price}
+                                    onRemoveFromCart={onRemoveFromCart}
+                                />
 
-                            <div className={styles.divider} />
-                        </div>
-                    ))}
+                                <div className={styles.divider} />
+                            </div>
+                        ))}
 
-                </ul>
-            </section>
+                    </ul>
+                </section>
+            </main>
 
             <Footer className={styles.footer} />
         </div>
