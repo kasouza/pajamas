@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export default function Card({ id, title, price, image, altText }) {
     return (
-        <Link href={`products/${id}`}>
+        <Link href={`/products/${id}`}>
             <a className={styles.card}>
                 <img className={styles.productImage} src={image} alt={altText} />
 

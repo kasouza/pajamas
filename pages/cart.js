@@ -5,8 +5,15 @@ import Nav from "../components/Nav"
 
 import styles from "../styles/Cart.module.css"
 
+import Link from "next/link"
+
 export default function Cart({ cart, onRemoveFromCart }) {
     const [cartData, setCartData] = useState([])
+    const [total, setTotal] = useState(0)
+
+    function updateTotal(cartData) {
+        setTotal(cartData.reduce((acc, purchase) => acc + purchase.price, 0))
+    }
 
     useEffect(async () => {
         const baseUrl = `/api/products`
@@ -19,14 +26,18 @@ export default function Cart({ cart, onRemoveFromCart }) {
                 if (!err) {
                     res.json().then((products, err) => {
                         if (!err) {
-                            products.forEach(item => {
-                                const product = cart.find(product => product.id == item.id)
-                                const size = product != undefined ? product.size : ''
-
-                                item.size = size
+                            const purchases = cart.map(purchase => {
+                                const productData = products.find(product => product.id == purchase.id)
+                                if (productData) {
+                                    return {
+                                        ...productData,
+                                        ...purchase
+                                    }
+                                }
                             })
 
-                            setCartData(products    )
+                            setCartData(purchases)
+                            updateTotal(purchases)
                         } else {
                             console.err(err)
                         }
@@ -39,9 +50,11 @@ export default function Cart({ cart, onRemoveFromCart }) {
     }, [])
 
     useEffect(() => {
-        setCartData(cartData.filter(cartItem => cart.find(product => product == cartItem.id) != undefined))
-    }, [cart])
+        const newCartData = cartData.filter(cartItem => cart.find(product => product.purchaseId == cartItem.purchaseId) != undefined)
 
+        setCartData(newCartData)
+        updateTotal(newCartData)
+    }, [cart])
 
     return (
         <div className={styles.container}>
@@ -51,21 +64,24 @@ export default function Cart({ cart, onRemoveFromCart }) {
 
             <main>
                 <section className={styles.checkoutContainer}>
-                    <p className={styles.subtotal}>Subtotal: <span>R$3232123.00</span></p>
+                    <p className={styles.subtotal}>Subtotal: <span>R${total.toFixed(2)}</span></p>
 
                     <button className={styles.checkout}>
                         Finalizar Compra
                     </button>
+
+
                 </section>
 
-                <section>
+                <section className={styles.productsContainer}>
                     <ul className={styles.cart}>
                         <div className={styles.divider} />
 
                         {cartData.map(item => (
-                            <div key={item.id} className={styles.cartItemContainer}>
+                            <div key={item.purchaseId} className={styles.cartItemContainer}>
                                 <CartItem
                                     id={item.id}
+                                    purchaseId={item.purchaseId}
                                     title={item.title}
                                     price={item.price}
                                     size={item.size}
@@ -77,7 +93,13 @@ export default function Cart({ cart, onRemoveFromCart }) {
                         ))}
 
                     </ul>
+
+
+                    <Link href="/">
+                        <a className={styles.continueBuying}>Continuar Comprando</a>
+                    </Link>
                 </section>
+
             </main>
 
             <Footer className={styles.footer} />

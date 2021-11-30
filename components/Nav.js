@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Nav({ productsInCart }) {
-  console.log(productsInCart)
   return (
     <nav className={styles.nav}>
       <Link href="/">

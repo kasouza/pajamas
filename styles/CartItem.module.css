@@ -13,7 +13,8 @@
 }
 
 .cartItem button {
-    background: rgb(228, 14, 14);
+    background: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .trash {

@@ -1,20 +1,23 @@
 import styles from "../../styles/CartItem.module.css"
 
 import Image from "next/image"
+import Link from "next/link"
 
-export default function CartItem({ id, title, price, size, onRemoveFromCart }) {
+export default function CartItem({ id, purchaseId, title, price, size, onRemoveFromCart }) {
     return (
         <li className={styles.cartItem}>
             <Image src="/images/cat.jpg" width={128} height={80} />
 
-            <div>
-                <h3 className={styles.title}>{title}</h3>
-                <span>Preço: {price}</span>
-                <br />
-                <span>Tamanho: {size}</span>
-            </div>
+            <Link href={`/products/${id}`}>
+                <a>
+                    <h3 className={styles.title}>{title}</h3>
+                    <span>Preço: R${price.toFixed(2)}</span>
+                    <br />
+                    <span>Tamanho: {size}</span>
+                </a>
+            </Link>
 
-            <button onClick={() => onRemoveFromCart(id)}>
+            <button onClick={() => onRemoveFromCart(purchaseId)}>
                 <img className={styles.trash} src="/images/trash.png" />
             </button>
         </li>

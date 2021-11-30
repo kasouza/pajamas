@@ -8,11 +8,11 @@ import Radio from "../../components/Radio"
 import { getAllProductsIds, getProductData } from "../../lib/products"
 
 import { useState } from "react"
+import Link from "next/link"
 
 const images = [
     '/images/cat.jpg',
 ]
-
 
 export default function Product({ cart, productData, onAddToCart }) {
     const [size, setSize] = useState('M')
@@ -36,28 +36,30 @@ export default function Product({ cart, productData, onAddToCart }) {
                         <h2>Tamanho: </h2>
                         <ul className={styles.size}>
                             <li>
-                                <Radio name="size" value="P" onClick={setSize} checked={size == "P"} />
+                                <Radio name="size" value="P" onChange={setSize} />
                             </li>
 
                             <li>
-                                <Radio name="size" value="M" onClick={setSize} checked={size == "M"} />
+                                <Radio name="size" value="M" onChange={setSize} defaultChecked />
                             </li>
 
                             <li>
-                                <Radio name="size" value="G" onClick={setSize} checked={size == "G"} />
+                                <Radio name="size" value="G" onChange={setSize} />
                             </li>
 
                             <li>
-                                <Radio name="size" value="GG" onClick={setSize} checked={size == "GG"} />
+                                <Radio name="size" value="GG" onChange={setSize} />
                             </li>
                         </ul>
                     </section>
 
-                    <button
-                        onClick={() => onAddToCart(productData.id, size)}
-                        className={styles.addToCart}>
-                        Adicionar ao Carrinho
-                    </button>
+                    <Link href={`/cart`}>
+                        <a
+                            onClick={() => onAddToCart(productData.id, size)}
+                            className={styles.addToCart}>
+                            Adicionar ao Carrinho
+                        </a>
+                    </Link>
 
                     <section className={styles.info}>
                         <h2>Mais Detalhes</h2>
