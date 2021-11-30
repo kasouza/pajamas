@@ -15,7 +15,7 @@ export default function Card({ id, title, price, image, altText }) {
                 R${price}
             </span>
 
-            <Link href={`products/${id}`}>
+            <Link href={`/products/${id}`}>
                 <a className={styles.buy}>Ver Mais</a>
             </Link>
         </div>
