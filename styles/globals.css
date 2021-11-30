@@ -48,12 +48,8 @@ li {
 
   --primary-color: var(--dark-lavender);
   --cards-color: var(--dark-color);
+  --button-hover-color:#44326e;
   --button-color: var(--regalia);
   --shadow-color: rgba(43, 47, 119, .5);
   --font-color: #f2f2f2;
-}
-
-.noScroll {
-  position: fixed;
-  overflow-y: hidden;
 }

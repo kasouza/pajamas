@@ -10,3 +10,24 @@
   
     background-color: var(--primary-color);
 }
+
+.cartContainer {
+    position: relative;
+}
+
+.productsInCart {
+    position: absolute;
+    top: -4px;
+    right: -5px;
+
+    width: 1.1rem;
+    height: 1.1rem;
+
+    border-radius: 50%;
+
+    background-color: red;
+
+    font-weight: 300;
+    font-size: 0.8rem;
+    text-align: center;
+}

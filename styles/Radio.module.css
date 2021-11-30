@@ -9,7 +9,11 @@
 
     background-color: var(--button-color);
 
-    border-radius: 10px;
+    border-radius: 50%;
+}
+
+.radio:hover {
+    background-color: var(--button-hover-color);
 }
 
 .label {
@@ -35,6 +39,6 @@
 }
 
 .input:checked ~ .checkmark {
-    border: 1px solid white;
-    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
 }

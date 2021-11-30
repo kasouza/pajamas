@@ -3,7 +3,8 @@ import styles from '../styles/Nav.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 
-export default function Nav() {
+export default function Nav({ productsInCart }) {
+  console.log(productsInCart)
   return (
     <nav className={styles.nav}>
       <Link href="/">
@@ -13,7 +14,7 @@ export default function Nav() {
       </Link>
 
       <Link href="/cart">
-        <a>
+        <a className={styles.cartContainer}>
           <Image
             className={styles.cartIcon}
             width={32}
@@ -21,6 +22,11 @@ export default function Nav() {
             src="/images/shopping-cart.svg"
             alt="Carrinho de Compras"
           />
+
+          {productsInCart > 0
+            ? <span className={styles.productsInCart}>{productsInCart}</span>
+            : <></>
+          }
         </a>
       </Link>
     </nav>

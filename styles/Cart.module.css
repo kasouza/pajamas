@@ -50,6 +50,10 @@
     min-height: 65vh;
 }
 
+.cartItemContainer {
+    width: 100%;
+}
+
 .checkoutContainer {
     display: flex;
     flex-direction: column;

@@ -4,20 +4,18 @@ import Link from "next/link"
 
 export default function Card({ id, title, price, image, altText }) {
     return (
-        <div className={styles.card}>
-            <img className={styles.productImage} src={image} width={284} height={177} alt={altText} />
-            
-            <h3 className={styles.productName}>
-                {title}
-            </h3>
+        <Link href={`products/${id}`}>
+            <a className={styles.card}>
+                <img className={styles.productImage} src={image} alt={altText} />
 
-            <span className={styles.price}>
-                R${price}
-            </span>
+                <h3 className={styles.productName}>
+                    {title}
+                </h3>
 
-            <Link href={`/products/${id}`}>
-                <a className={styles.buy}>Ver Mais</a>
-            </Link>
-        </div>
+                <span className={styles.price}>
+                    R${price}
+                </span>
+            </a>
+        </Link>
     )
 }
