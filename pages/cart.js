@@ -7,7 +7,7 @@ import styles from "../styles/Cart.module.css"
 
 import Link from "next/link"
 
-export default function Cart({ cart, onRemoveFromCart }) {
+export default function Cart({ cart, onChangeQuantity, onRemoveFromCart }) {
     const [cartData, setCartData] = useState([])
     const [total, setTotal] = useState(0)
 
@@ -50,7 +50,21 @@ export default function Cart({ cart, onRemoveFromCart }) {
     }, [])
 
     useEffect(() => {
-        const newCartData = cartData.filter(cartItem => cart.find(product => product.purchaseId == cartItem.purchaseId) != undefined)
+        const newCartData = cartData
+            .map(purchase => {
+                const cartItem = cart.find(product => product.purchaseId == purchase.purchaseId)
+
+                if (cartItem) {
+                    const newPurchase = {
+                        ...purchase,
+                        ...cartItem
+                    }
+                    return newPurchase
+                }
+
+                return null
+            })
+            .filter(purchase => purchase != null)
 
         setCartData(newCartData)
         updateTotal(newCartData)
@@ -62,7 +76,7 @@ export default function Cart({ cart, onRemoveFromCart }) {
                 <Nav productsInCart={cart.length} />
             </header>
 
-            <main>
+            <main className={styles.main}>
                 <section className={styles.checkoutContainer}>
                     <p className={styles.subtotal}>Subtotal: <span>R${total.toFixed(2)}</span></p>
 
@@ -85,6 +99,8 @@ export default function Cart({ cart, onRemoveFromCart }) {
                                     title={item.title}
                                     price={item.price}
                                     size={item.size}
+                                    quantity={item.quantity}
+                                    onChangeQuantity={onChangeQuantity}
                                     onRemoveFromCart={onRemoveFromCart}
                                 />
 
@@ -102,7 +118,9 @@ export default function Cart({ cart, onRemoveFromCart }) {
 
             </main>
 
-            <Footer className={styles.footer} />
+            <div className={styles.footerContainer}>
+                <Footer className={styles.footer} />
+            </div>
         </div>
     )
 }

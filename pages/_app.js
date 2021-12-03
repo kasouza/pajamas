@@ -4,7 +4,6 @@ import '../styles/globals.css'
 let _purchaseId = 0
 
 function getPurchaseId() {
-  console.log(_purchaseId)
   return _purchaseId++
 }
 
@@ -12,7 +11,8 @@ function createPurchase(id, size) {
   return {
     purchaseId: getPurchaseId(),
     id,
-    size
+    size,
+    quantity: 1
   }
 }
 
@@ -28,7 +28,36 @@ function MyApp({ Component, pageProps }) {
     setCart(cart.filter(product => product.purchaseId != purchaseId))
   }
 
-  return <Component {...pageProps} cart={cart} onAddToCart={onAddToCart} onRemoveFromCart={onRemoveFromCart} />
+  function onChangeQuantity(purchaseId, newQuantity) {
+    const newCart = cart.map(purchase => {
+      if (purchase.purchaseId == purchaseId) {
+        const newPurchase = {
+          ...purchase,
+          quantity: newQuantity
+        }
+
+        return newPurchase
+      }
+
+      return purchase
+    })
+
+    // console.table(cart)
+    // console.table(newCart)
+    // console.log()
+
+    setCart(newCart)
+  }
+
+  return (
+    <Component
+      {...pageProps}
+      cart={cart}
+      onAddToCart={onAddToCart}
+      onChangeQuantity={onChangeQuantity}
+      onRemoveFromCart={onRemoveFromCart}
+    />
+  )
 }
 
 export default MyApp

@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Arrow from './Arrow'
 import { range } from '../lib/utils'
 
+import Image from "next/image"
+
 export default function Carousel({ images }) {
     const [imageId, setImageId] = useState(0)
     const [transitionImg, setTransitionImage] = useState(-1)
@@ -44,7 +46,15 @@ export default function Carousel({ images }) {
 
     return (
         <div className={styles.carousel}>
-            <img className={styles.image} src={images[imageId]} />
+            <div className={styles.imageContainer}>
+                <Image
+                    layout="responsive"
+                    src={images[imageId]}
+                    width={284}
+                    height={177}
+                />
+            </div>
+
             {transitionImg != -1
                 ? <img className={`${styles.transition} ${transitionDir}`} src={images[transitionImg]} />
                 : <></>

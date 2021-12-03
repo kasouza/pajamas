@@ -3,13 +3,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+
+    background-color: var(--background-color);
+    border-radius: 0 0 5px 5px;
 }
 
-.content {
-    padding: 10px;
-    width: 98vw;
+.stuff {
+    display: flex;
+    flex-direction: column;
 
-    background-color: var(--dark-color);
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+
+    background: var(--dark-color);
+}
+
+.stuff > div:last-child {
+    padding: 25px;
 }
 
 /* Heading */
@@ -37,7 +49,14 @@
 
 /* Addtitional Info */
 .info {
+    padding: 20px;
+    padding-top: 0;
+    margin: 20px 0;
+    width: 99vw;
+    background: var(--dark-color);
     font-weight: 200;
+
+    border-radius: 5px;
 }
 
 /* Button */
@@ -58,4 +77,25 @@
 
 .addToCart:hover {
     background-color: var(--button-hover-color);
+}
+
+@media screen and (min-width: 800px) {
+    .content {
+        width: 85vw;
+  }
+
+    .stuff {
+        padding: 50px;
+        padding-left: 25px;
+        flex-direction: row;
+
+        column-gap: 25px;
+
+        width: 98vw;
+    }
+
+    .info {
+        width: 95vw;
+        background: var(--dark-color);
+    }
 }

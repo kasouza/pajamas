@@ -1,20 +1,31 @@
 import styles from "../styles/Card.module.css"
 
+import Image from "next/image"
 import Link from "next/link"
 
 export default function Card({ id, title, price, image, altText }) {
     return (
         <Link href={`/products/${id}`}>
             <a className={styles.card}>
-                <img className={styles.productImage} src={image} alt={altText} />
+                <div className={styles.productImage}>
+                    <Image
+                        layout="responsive"
+                        src={image}
+                        width={284}
+                        height={177}
+                        alt={altText}
+                    />
+                </div>
 
-                <h3 className={styles.productName}>
-                    {title}
-                </h3>
+                <div className={styles.info}>
+                    <h3 className={styles.productName}>
+                        {title}
+                    </h3>
 
-                <span className={styles.price}>
-                    R${price}
-                </span>
+                    <span className={styles.price}>
+                        R${price}
+                    </span>
+                </div>
             </a>
         </Link>
     )

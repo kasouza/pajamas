@@ -24,48 +24,51 @@ export default function Product({ cart, productData, onAddToCart }) {
             </header>
 
             <main className={styles.main}>
-                <Carousel className={styles.carousel} images={images} />
+                <div className={styles.stuff}>
 
-                <div className={styles.content}>
-                    <section className={styles.heading}>
-                        <h1 className={styles.title}>{productData.title}</h1>
-                        <span className={styles.price}>{`R$${productData.price.toFixed(2)}`}</span>
-                    </section>
+                    <Carousel className={styles.carousel} images={images} />
 
-                    <section className={styles.options}>
-                        <h2>Tamanho: </h2>
-                        <ul className={styles.size}>
-                            <li>
-                                <Radio name="size" value="P" onChange={setSize} />
-                            </li>
+                    <div>
+                        <section className={styles.heading}>
+                            <h1 className={styles.title}>{productData.title}</h1>
+                            <span className={styles.price}>{`R$${productData.price.toFixed(2)}`}</span>
+                        </section>
 
-                            <li>
-                                <Radio name="size" value="M" onChange={setSize} defaultChecked />
-                            </li>
+                        <section className={styles.options}>
+                            <h2>Tamanho: </h2>
+                            <ul className={styles.size}>
+                                <li>
+                                    <Radio name="size" value="P" onChange={setSize} />
+                                </li>
 
-                            <li>
-                                <Radio name="size" value="G" onChange={setSize} />
-                            </li>
+                                <li>
+                                    <Radio name="size" value="M" onChange={setSize} defaultChecked />
+                                </li>
 
-                            <li>
-                                <Radio name="size" value="GG" onChange={setSize} />
-                            </li>
-                        </ul>
-                    </section>
+                                <li>
+                                    <Radio name="size" value="G" onChange={setSize} />
+                                </li>
 
-                    <Link href={`/cart`}>
-                        <a
-                            onClick={() => onAddToCart(productData.id, size)}
-                            className={styles.addToCart}>
-                            Adicionar ao Carrinho
-                        </a>
-                    </Link>
+                                <li>
+                                    <Radio name="size" value="GG" onChange={setSize} />
+                                </li>
+                            </ul>
+                        </section>
 
-                    <section className={styles.info}>
-                        <h2>Mais Detalhes</h2>
-                        <div dangerouslySetInnerHTML={{ __html: productData.htmlContent }} />
-                    </section>
+                        <Link href={`/cart`}>
+                            <a
+                                onClick={() => onAddToCart(productData.id, size)}
+                                className={styles.addToCart}>
+                                Adicionar ao Carrinho
+                            </a>
+                        </Link>
+                    </div>
                 </div>
+                <section className={styles.info}>
+                    <h2>Mais Detalhes</h2>
+                    <div dangerouslySetInnerHTML={{ __html: productData.htmlContent }} />
+                </section>
+
             </main>
 
             <Footer />

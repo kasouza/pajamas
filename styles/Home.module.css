@@ -34,11 +34,19 @@
 
 /* Products */
 .products {
-  margin: 25px 0;
+  margin: 25px auto;
 
-  width: 100%;
+  width: 95vw;
 
   display: grid;
   grid-row-gap: 25px;
   justify-items: center;
+}
+
+@media screen and (min-width: 800px) {
+  .products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 50px;
+  }
 }
