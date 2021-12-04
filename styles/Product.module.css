@@ -47,6 +47,10 @@
     justify-content: space-evenly;
 }
 
+.size li {
+    margin: 10px;
+}
+
 /* Addtitional Info */
 .info {
     padding: 20px;

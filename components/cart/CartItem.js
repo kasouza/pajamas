@@ -23,9 +23,9 @@ export default function CartItem({ id, purchaseId, title, price, size, quantity,
                 <Image
                     layout="responsive"
                     className={styles.image}
-                    width={284}
-                    height={177}
-                    src="/images/cat.jpg" />
+                    width={1}
+                    height={1}
+                    src={`/images/${id}/square.jpg`} />
             </div>
 
             <div className={styles.infoContainer}>

@@ -34,7 +34,7 @@ export default function Home({ cart, productsData }) {
         <section className={styles.products}>
           {/* Create a card for each product that was read from disk */}
           {productsData.map(product => (
-            <Card key={product.id} id={product.id} title={product.title} price={product.price} image={product.image} />
+            <Card key={product.id} id={product.id} title={product.title} price={product.price} image={`/images/${product.id}/0.jpg`} />
           ))}
         </section>
       </main>

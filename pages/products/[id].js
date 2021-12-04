@@ -9,10 +9,7 @@ import { getAllProductsIds, getProductData } from "../../lib/products"
 
 import { useState } from "react"
 import Link from "next/link"
-
-const images = [
-    '/images/cat.jpg',
-]
+import { range } from "../../lib/utils"
 
 export default function Product({ cart, productData, onAddToCart }) {
     const [size, setSize] = useState('M')
@@ -26,7 +23,7 @@ export default function Product({ cart, productData, onAddToCart }) {
             <main className={styles.main}>
                 <div className={styles.stuff}>
 
-                    <Carousel className={styles.carousel} images={images} />
+                    <Carousel className={styles.carousel} images={productData.images} />
 
                     <div>
                         <section className={styles.heading}>
@@ -78,10 +75,15 @@ export default function Product({ cart, productData, onAddToCart }) {
 
 export async function getStaticProps({ params }) {
     const productData = await getProductData(params.id)
+    const images = range(0, productData.imageQuantity).map(i => `/images/${productData.id}/${i}.jpg`)
 
     return {
         props: {
-            productData
+            productData: {
+                ...productData,
+                images
+            },
+
         }
     }
 }

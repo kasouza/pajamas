@@ -50,8 +50,8 @@ export default function Carousel({ images }) {
                 <Image
                     layout="responsive"
                     src={images[imageId]}
-                    width={284}
-                    height={177}
+                    width={16}
+                    height={10}
                 />
             </div>
 
