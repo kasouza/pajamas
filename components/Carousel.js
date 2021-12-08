@@ -4,71 +4,71 @@ import { useState } from 'react'
 import Arrow from './Arrow'
 import { range } from '../lib/utils'
 
-import Image from "next/image"
+// Must be equal to the transition_duration in the css
+const TRANSITION_DURATION = 1000 // ms
 
-export default function Carousel({ images }) {
-    const [imageId, setImageId] = useState(0)
-    const [transitionImg, setTransitionImage] = useState(-1)
-    const [transitionDir, setTransitionDir] = useState(styles.translr)
-    const [isTransitioning, setIsTransitioning] = useState(false)
+export default function Carousel({ children }) {
+    const [currentImage, setCurrentImage] = useState(0)
+    const [currentTransition, setCurrentTransition] = useState(-1)
 
-    function transition(image) {
-        setTransitionImage(image)
+    const wrap = (max) => (i) => Math.abs(i) % max
+    const wrapChildren = wrap(children.length)
 
-        setTimeout(() => {
-            setTransitionImage(-1)
-            setImageId(image)
-            setIsTransitioning(false)
+    const setImage = (i) => setCurrentImage(wrapChildren(i))
+    const setTransition = (i) => setCurrentTransition(wrapChildren(i))
 
-        }, 1000)
-    }
-
-    function setImage(count) {
-        if (images.length > 1 && !isTransitioning) {
-            // Wrap around (i.e. (0 - 1) == (images.length - 1))
-            const nextImageId = Math.abs(imageId - count) % images.length
-
-            setIsTransitioning(true)
-            setTransitionDir(count > 0 ? styles.transrl : styles.translr)
-            transition(nextImageId)
+    const changeBy = (i) => () => {
+        if (currentTransition == -1) {
+            setTransition(currentImage + i)
+    
+            setTimeout(() => {
+                setImage(currentImage + i)
+                setCurrentTransition(-1)
+            }, TRANSITION_DURATION)
         }
     }
 
-    function Indicators({ current, max }) {
-        return (
-            <ol className={styles.indicators}>
-                {range(0, max).map(i => (
-                    <li className={`${styles.indicator} ${current == i ? styles.currentIndicator : ''}`} key={i}></li>
-                ))}
-            </ol>
-        )
-    }
+    const inc = changeBy(1)
+    const dec = changeBy(-1)
 
     return (
         <div className={styles.carousel}>
-            <div className={styles.imageContainer}>
-                <Image
-                    layout="responsive"
-                    src={images[imageId]}
-                    width={16}
-                    height={10}
-                />
+            <div className={styles.inner}>
+                <ol className={styles.images}>
+                    {children.map((child, idx) => {
+                        const currentImageClass = idx == currentImage ? styles.currentImage : ''
+                        const transitionClass = idx == currentTransition ? styles.transition : ''
+
+                        return (
+                            <li key={idx} className={`${styles.imageContainer} ${currentImageClass} ${transitionClass}`}>
+                                {child}
+                            </li>
+                        )
+                    })}
+                </ol>
+
+                <div className={styles.buttons}>
+                    <button onClick={dec} className={styles.button}>
+                        <Arrow direction="left" />
+                    </button>
+
+                    <button onClick={inc} className={styles.button}>
+                        <Arrow direction="right" />
+                    </button>
+                </div>
+
+                <div className={styles.indicators}>
+                    {range(0, children.length).map(i => {
+                        const className = i == currentImage ? styles.currentIndicator : ''
+
+                        return (
+                            <span key={i} className={`${styles.indicator} ${className}`} />
+                        )
+                    })}
+                </div>
             </div>
-
-            {transitionImg != -1
-                ? <img className={`${styles.transition} ${transitionDir}`} src={images[transitionImg]} />
-                : <></>
-            }
-
-            {images.length > 1
-                ? (<>
-                    <Indicators current={imageId} max={images.length} />
-
-                    <button className={`${styles.button} ${styles.left}`} onClick={() => setImage(-1)}><Arrow direction="left" /></button>
-                    <button className={`${styles.button} ${styles.right}`} onClick={() => setImage(1)}><Arrow direction="right" /></button>
-                </>)
-                : <></>}
-
         </div>
+
+
     )
 }

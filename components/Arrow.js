@@ -1,18 +1,22 @@
 import styles from '../styles/Arrow.module.css'
 
-import { useEffect, useState } from 'react'
-
 export default function Arrow({ direction }) {
-    const [directionClass, setDirectionClass] = useState('')
+    if (!direction) {
+        console.trace('No direction was given')
+        return <></>
+    }
 
     const directions = {
         left: styles.left,
         right: styles.right
     }
 
-    useEffect(() => {
-        setDirectionClass(directions[direction])
-    })
+    const directionClass = directions[direction]
+
+    if (!directionClass) {
+        console.trace(`Invalid direction: ${direction}`)
+        return <></>
+    }
 
     return (
         <div className={`${styles.arrow} ${directionClass}`} />

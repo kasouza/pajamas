@@ -6,10 +6,12 @@ import Nav from "../../components/Nav"
 import Radio from "../../components/Radio"
 
 import { getAllProductsIds, getProductData } from "../../lib/products"
+import { range } from "../../lib/utils"
+
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
-import { range } from "../../lib/utils"
 
 export default function Product({ cart, productData, onAddToCart }) {
     const [size, setSize] = useState('M')
@@ -23,7 +25,11 @@ export default function Product({ cart, productData, onAddToCart }) {
             <main className={styles.main}>
                 <div className={styles.stuff}>
 
-                    <Carousel className={styles.carousel} images={productData.images} />
+                    <Carousel>
+                        {productData.images.map((imgSrc, idx) => (
+                            <Image key={idx} src={imgSrc} width={16} height={10} layout="responsive" />
+                        ))}
+                    </Carousel>
 
                     <div>
                         <section className={styles.heading}>
