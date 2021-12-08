@@ -1,4 +1,8 @@
 .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     padding: 10px;
     display: grid;
     align-items: end;
@@ -9,11 +13,20 @@
     background-color: var(--primary-color);
 }
 
-.footer a {
+.footer a, .footer > div {
+    text-align: center;
     color: inherit;
     text-decoration: underline;
 }
 
 .footer address {
+    margin-top: 20px;
     text-align: center;
+}
+
+.footer address a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 3px;
 }

@@ -101,8 +101,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
 }
+
 .continueBuying {
     text-decoration: underline;
 }
@@ -137,5 +137,9 @@
 
     .checkoutContainer p {
         margin: 0;
+    }
+
+    .productsContainer {
+        width: 50%;
     }
 }

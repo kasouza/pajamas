@@ -8,19 +8,27 @@ import { range } from '../lib/utils'
 const TRANSITION_DURATION = 1000 // ms
 
 export default function Carousel({ children }) {
+    // Make sure we are working with an array, even if there's only one child
+    const images = Array.isArray(children) ? children : [children]
+
+    if (images.length === 0) {
+        console.trace('Carousel need at least one child')
+        return <></>
+    }
+
     const [currentImage, setCurrentImage] = useState(0)
     const [currentTransition, setCurrentTransition] = useState(-1)
 
     const wrap = (max) => (i) => Math.abs(i) % max
-    const wrapChildren = wrap(children.length)
+    const wrapImages = wrap(images.length)
 
-    const setImage = (i) => setCurrentImage(wrapChildren(i))
-    const setTransition = (i) => setCurrentTransition(wrapChildren(i))
+    const setImage = (i) => setCurrentImage(wrapImages(i))
+    const setTransition = (i) => setCurrentTransition(wrapImages(i))
 
     const changeBy = (i) => () => {
         if (currentTransition == -1) {
             setTransition(currentImage + i)
-    
+
             setTimeout(() => {
                 setImage(currentImage + i)
                 setCurrentTransition(-1)
@@ -35,7 +43,7 @@ export default function Carousel({ children }) {
         <div className={styles.carousel}>
             <div className={styles.inner}>
                 <ol className={styles.images}>
-                    {children.map((child, idx) => {
+                    {images.map((child, idx) => {
                         const currentImageClass = idx == currentImage ? styles.currentImage : ''
                         const transitionClass = idx == currentTransition ? styles.transition : ''
 
@@ -47,25 +55,30 @@ export default function Carousel({ children }) {
                     })}
                 </ol>
 
-                <div className={styles.buttons}>
-                    <button onClick={dec} className={styles.button}>
-                        <Arrow direction="left" />
-                    </button>
+                {images.length > 1
+                    ? <>
+                        <div className={styles.buttons}>
+                            <button onClick={dec} className={styles.button}>
+                                <Arrow direction="left" />
+                            </button>
 
-                    <button onClick={inc} className={styles.button}>
-                        <Arrow direction="right" />
-                    </button>
-                </div>
+                            <button onClick={inc} className={styles.button}>
+                                <Arrow direction="right" />
+                            </button>
+                        </div>
 
-                <div className={styles.indicators}>
-                    {range(0, children.length).map(i => {
-                        const className = i == currentImage ? styles.currentIndicator : ''
+                        <div className={styles.indicators}>
+                            {range(0, images.length).map(i => {
+                                const className = i == currentImage ? styles.currentIndicator : ''
 
-                        return (
-                            <span key={i} className={`${styles.indicator} ${className}`} />
-                        )
-                    })}
-                </div>
+                                return (
+                                    <span key={i} className={`${styles.indicator} ${className}`} />
+                                )
+                            })}
+                        </div>
+                    </>
+
+                    : <></>}
             </div>
         </div>
 

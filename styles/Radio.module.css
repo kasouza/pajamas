@@ -1,4 +1,6 @@
 .radio {
+    cursor: pointer;
+
     display: grid;
     align-content: center;
 
