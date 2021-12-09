@@ -2,12 +2,15 @@ import styles from '../styles/Carousel.module.css'
 
 import { useState } from 'react'
 import Arrow from './Arrow'
-import { range } from '../lib/utils'
+import { range, wrap } from '../lib/utils'
 
 // Must be equal to the transition_duration in the css
 const TRANSITION_DURATION = 1000 // ms
 
 export default function Carousel({ children }) {
+    const [currentImage, setCurrentImage] = useState(0)
+    const [currentTransition, setCurrentTransition] = useState(-1)
+    
     // Make sure we are working with an array, even if there's only one child
     const images = Array.isArray(children) ? children : [children]
 
@@ -16,10 +19,6 @@ export default function Carousel({ children }) {
         return <></>
     }
 
-    const [currentImage, setCurrentImage] = useState(0)
-    const [currentTransition, setCurrentTransition] = useState(-1)
-
-    const wrap = (max) => (i) => Math.abs(i) % max
     const wrapImages = wrap(images.length)
 
     const setImage = (i) => setCurrentImage(wrapImages(i))

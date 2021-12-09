@@ -2,7 +2,6 @@ import styles from "../../styles/CartItem.module.css"
 
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState } from "react"
 
 export default function CartItem({ id, purchaseId, title, price, size, quantity, onChangeQuantity, onRemoveFromCart }) {
     function increment() {
@@ -25,7 +24,9 @@ export default function CartItem({ id, purchaseId, title, price, size, quantity,
                     className={styles.image}
                     width={1}
                     height={1}
-                    src={`/images/${id}/square.jpg`} />
+                    src={`/images/${id}/square.jpg`}
+                    alt="Cart Icon"
+                />
             </div>
 
             <div className={styles.infoContainer}>
@@ -44,7 +45,7 @@ export default function CartItem({ id, purchaseId, title, price, size, quantity,
                     <button className={styles.decrement} onClick={decrement}>
                         {quantity > 1
                             ? <span>-</span>
-                            : <img className={styles.trash} src="/images/trash.png" />}
+                            : <div className={styles.trash}><Image width={32} height={32} alt="Remove Product" src="/images/trash.png" /></div>}
                     </button>
 
                     <span className={styles.quantity}>{quantity}</span>

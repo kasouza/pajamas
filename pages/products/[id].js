@@ -27,7 +27,7 @@ export default function Product({ cart, productData, onAddToCart }) {
 
                     <Carousel>
                         {productData.images.map((imgSrc, idx) => (
-                            <Image key={idx} src={imgSrc} width={16} height={10} layout="responsive" />
+                            <Image key={idx} src={imgSrc} width={16} height={10} layout="responsive" alt="Pajama Image" />
                         ))}
                     </Carousel>
 

@@ -10,7 +10,7 @@ export default function Footer() {
             <a href="https://www.pexels.com/pt-br/@cottonbro">Foto de cottonbro no Pexels</a>
             <address>
                 <a href="https://github.com/kasouza/pajamas">
-                    <Image width={16} height={16} src="/images/GitHub-Mark-32px.png" />
+                    <Image width={16} height={16} src="/images/GitHub-Mark-32px.png" alt="Github Logo" />
                     <span>kasouza</span>
                 </a>
             </address>
